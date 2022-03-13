@@ -2,12 +2,12 @@ import { ShareMe, version } from "./client.js";
 const app = new ShareMe(location.origin);
 console.log("%cShareMe-v" + version, "color: #fff; background: #6CB7DA; font-size: 16px;");
 const namespace = window.location.pathname.slice(1);
-if (namespace === "" || !/^[a-zA-Z]+$/.test(namespace) || namespace.length > 16) {
+if (namespace === "" || !/^[a-zA-Z0-9]{1,16}$/.test(namespace)) {
     location.pathname = generateRandomString();
 }
 
 function generateRandomString(length = 6) {
-    const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     let text = "";
     for (let i = 0; i < length; i++) text += possible.charAt(Math.floor(Math.random() * possible.length));
     return text;
