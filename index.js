@@ -12,13 +12,16 @@ const port = process.env.PORT || 3000;
         console.log("Use MongoDB specified in config.json");
     } catch (e) {
         try {
-            const { uri, db, collection } = JSON.parse(process.env.MongoDB_CONFIG);
+            const _btoa = (str) => Buffer.from(str).toString("base64"); // encode
+            const _atob = (b64Encoded) => Buffer.from(b64Encoded, "base64").toString(); // decode
+            // console.log(process.env.MONGODB_CONFIG);
+            const { uri, db, collection } = JSON.parse(_atob(process.env.MONGODB_CONFIG));
             storage = new MongoDB(uri, db, collection);
             console.log("Use MongoDB specified in environment variable");
         } catch (e) {
             console.log("No Database is configured, using file storage");
+            storage = new FileDB("./server/db.json");
         }
-        storage = new FileDB("./server/db.json");
     }
     const app = handler(storage);
     await storage.connect();

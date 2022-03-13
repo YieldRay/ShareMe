@@ -1,6 +1,9 @@
 {
   "name": "shareme",
   "version": "0.0.2",
+  "engines": {
+    "node": "16.x"
+  },
   "description": "share something via web",
   "main": "index.js",
   "scripts": {
