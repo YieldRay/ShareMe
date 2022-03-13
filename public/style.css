@@ -19,15 +19,16 @@ body {
 }
 
 main {
+    display: block;
     margin: auto;
-    padding: 0.5em;
+    padding: 0 0.5em;
     height: 90vh;
 }
 footer {
     font-size: 0.8rem;
     color: #999;
     margin: auto;
-    padding: auto;
+    padding: 0.5rem;
     height: 10vh;
     text-align: center;
 }
@@ -35,15 +36,19 @@ footer a {
     color: #999;
     text-decoration: none;
 }
+
 footer p:not(:first-child) {
+    user-select: none;
     margin: 0;
 }
 main > textarea {
     display: block;
     overflow: auto;
     width: calc(100% - 1.5rem);
+    max-width: calc(100% - 1.5rem);
+    min-width: 50%;
     height: 100%;
-    margin: auto;
+    margin: 0.5rem auto;
     border: 0.05rem solid #aaa;
     box-shadow: 0 0.1rem rgba(0, 0, 0, 0.1);
     border-radius: 0.35rem;
@@ -54,4 +59,20 @@ main > textarea {
 }
 main > textarea:focus {
     outline: none;
+}
+
+::-webkit-scrollbar {
+    width: 1rem;
+}
+::-webkit-scrollbar-track {
+    background: #ddd;
+}
+::-webkit-scrollbar-thumb {
+    background: #aaa;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #888;
+}
+::-webkit-scrollbar-thumb:active {
+    background: #666;
 }

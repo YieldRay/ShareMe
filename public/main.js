@@ -6,7 +6,7 @@ if (namespace === "" || !/^[a-zA-Z0-9]{1,16}$/.test(namespace)) {
     location.pathname = generateRandomString();
 }
 
-function generateRandomString(length = 6) {
+function generateRandomString(length = 4) {
     const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     let text = "";
     for (let i = 0; i < length; i++) text += possible.charAt(Math.floor(Math.random() * possible.length));
@@ -34,6 +34,14 @@ async function updateToServer($textarea, $info) {
     $info.innerText = "Last Update: " + new Date().toLocaleString();
 }
 
+function debounce(func, wait = 0) {
+    let timer = null;
+    return function (...args) {
+        clearTimeout(timer);
+        timer = setTimeout(() => func(...args), wait);
+    };
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     const $textarea = document.getElementById("$textarea");
     const $info = document.getElementById("$info");
@@ -42,6 +50,6 @@ document.addEventListener("DOMContentLoaded", () => {
     $info.style.cursor = "pointer";
     $textarea.addEventListener(
         "input",
-        _.debounce(() => updateToServer($textarea, $info), 1000)
+        debounce(() => updateToServer($textarea, $info), 1000)
     );
 });

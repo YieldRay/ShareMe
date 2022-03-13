@@ -1,6 +1,6 @@
 const handler = require("./server/app.js");
-const { FileDB } = require("./storage/FileDB.js");
-const { MongoDB } = require("./storage/MongoDB.js");
+const { FileDB } = require("./storage/fileDB.js");
+const { MongoDB } = require("./storage/mongoDB.js");
 const fs = require("fs/promises");
 const port = process.env.PORT || 3000;
 

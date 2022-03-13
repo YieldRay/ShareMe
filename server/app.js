@@ -5,10 +5,12 @@ module.exports = function (storage) {
     app.use(express.json());
 
     app.get("/", (req, res) => {
-        res.sendFile(__dirname.replace(/(server)$/, "/public") + "/index.html");
+        res.setHeader("Cache-Control", "public, max-age=31536000");
+        res.sendFile(__dirname.replace(/(server)$/, "/public/") + "index.html");
     });
 
     app.get("/:namespace", (req, res) => {
+        res.setHeader("Cache-Control", "public, max-age=31536000");
         if (req.params.namespace.endsWith(".js") || req.params.namespace.endsWith(".css")) {
             res.sendFile(__dirname.replace(/(server)$/, "/public/") + req.params.namespace);
             return;
