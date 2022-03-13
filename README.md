@@ -14,7 +14,7 @@ an online service just like <https://note.ms/>
 
 support fileDB & mongoDB
 
-## fetch data via POST
+## Fetch data via POST
 
 ```
 get data: POST -> / -> with {namespace:String} -> receive {success:Boolean, data:String}
@@ -28,9 +28,9 @@ $ npm install
 $ npm start
 ```
 
-default settings is that if you don't specify the storage, it will use fileDB at "./server/db.json".  
-if you want to use mongoDB, you need to specify the "config.json" file.  
-example:  
+default settings is that if you don't specify the storage, it will use fileDB at './server/db.json'.  
+if you want to use mongoDB, you need to specify the 'config.json' file or set a json in environment variable 'MongoDB_CONFIG'  
+example:
 
 ```json
 {
@@ -39,3 +39,5 @@ example:
     "collection": "collectionName"
 }
 ```
+
+save the file as 'config.json' in root folder or set an environment variable named 'MongoDB_CONFIG' which contains such string.

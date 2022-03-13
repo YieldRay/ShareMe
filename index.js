@@ -7,10 +7,17 @@ const port = process.env.PORT || 3000;
 (async () => {
     let storage;
     try {
-        const config = await fs.readFile("./config.json", "utf8");
-        const { uri, db, collection } = JSON.parse(config);
+        const { uri, db, collection } = JSON.parse(await fs.readFile("./config.json", "utf8"));
         storage = new MongoDB(uri, db, collection);
+        console.log("Use MongoDB specified in config.json");
     } catch (e) {
+        try {
+            const { uri, db, collection } = JSON.parse(process.env.MongoDB_CONFIG);
+            storage = new MongoDB(uri, db, collection);
+            console.log("Use MongoDB specified in environment variable");
+        } catch (e) {
+            console.log("No Database is configured, using file storage");
+        }
         storage = new FileDB("./server/db.json");
     }
     const app = handler(storage);
