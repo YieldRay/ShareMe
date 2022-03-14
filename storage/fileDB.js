@@ -6,7 +6,7 @@ class FileDB {
     async connect() {
         const stat = await fs.stat(this.filename);
         if (!stat.isFile()) {
-            console.log("create new file");
+            console.log("Create new file");
             await fs.writeFile(this.filename, "{}", "utf8");
         }
         const data = await fs.readFile(this.filename, "utf8");
@@ -14,7 +14,7 @@ class FileDB {
         try {
             JSON.parse(data);
         } catch (e) {
-            throw new Error("json is invalid");
+            throw new Error("Invalid JSON");
         }
     }
     close() {

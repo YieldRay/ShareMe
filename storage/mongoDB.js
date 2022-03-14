@@ -18,12 +18,7 @@ class MongoDB {
         this.collection = this.db.collection(this.collectionName);
     }
     close() {
-        try {
-            this.client.close();
-        } catch (e) {
-            console.error(e);
-            return;
-        }
+        this.client.close();
         console.log("Connection closed");
     }
     async get(namespace) {
@@ -36,7 +31,6 @@ class MongoDB {
         }
     }
     async set(namespace, data) {
-        namespace = String(namespace);
         try {
             const result = await this.collection.updateOne({ namespace }, { $set: { data } }, { upsert: true });
             return result.modifiedCount === 1;

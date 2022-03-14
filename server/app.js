@@ -20,11 +20,11 @@ module.exports = function (storage) {
 
     app.post("/", async (req, res) => {
         try {
-            console.log(req.body);
+            console.log(new Date().toLocaleString(), req.body);
             if (!req.body.namespace || !/^[a-zA-Z0-9]{1,16}$/.test(req.body.namespace)) {
                 res.json({
                     success: false,
-                    message: "namespace is invalid",
+                    message: "invalid namespace",
                 });
                 return;
             }
@@ -46,4 +46,4 @@ module.exports = function (storage) {
     });
     return app;
 };
-// {success:bool,data:any}
+// {success:bool,data:string}
