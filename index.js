@@ -2,6 +2,7 @@ const handler = require("./server/app.js");
 const { FileDB } = require("./storage/fileDB.js");
 const { MongoDB } = require("./storage/mongoDB.js");
 const fs = require("fs/promises");
+const path = require("path");
 const port = process.env.PORT || 3000;
 
 (async () => {
@@ -23,7 +24,7 @@ const port = process.env.PORT || 3000;
             storage = new FileDB("./server/db.json");
         }
     }
-    const app = handler(storage);
+    const app = handler(storage, path.join(__dirname, "public"));
     await storage.connect();
     app.listen(port, () => {
         console.log(`server is running at http://localhost:${port}`);

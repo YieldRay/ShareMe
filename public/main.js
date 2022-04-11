@@ -1,6 +1,35 @@
 import { ShareMe, version } from "./client.js";
 const app = new ShareMe(location.origin);
-console.log("%cShareMe-v" + version, "color: #fff; background: #6CB7DA; font-size: 16px;");
+console.log(
+    "%c     _____ _     %c               __  __      \n" +
+        "%c    / ____| |%c                  |  \\/  |     \n" +
+        "%c   | (___ | |%c__   __ _ _ __ ___| \\  / | ___ \n" +
+        "%c    \\___ \\|%c '_ \\ / _` | '__/ _ \\ |/\\| |/ _ \\ \n" +
+        "%c    ____) | |%c | | (_| | | |  __/ |  | |  __/\n" +
+        "%c   |_____/|_|%c |_|\\__,_|_|  \\___|_|  |_|\\___|\n" +
+        `%c                           v${version}-by.YieldRay`,
+
+    "color:#ff0000",
+    "color:#ff0000",
+    "color:#ff3b00",
+    "color:#ff7500",
+    "color:#ff7800",
+    "color:#FD7B00",
+    "color:#FFAD00",
+    "color:#FEDA00",
+    "color:#D0FD00",
+    "color:#93FF00",
+    "color:#80FF00",
+    "color:#1AFF00",
+    "color:#00FF2E"
+);
+console.log(
+    `%c command line usage, replace ':namespace' with a namespace you want                                                        
+    $ curl -X POST -H "Content-Type: application/json" -d '{"data":"anything you want to store..."}' ${location.origin}/:namespace
+    $ curl -X POST http://localhost:3000/:namespace                                                                               `,
+    "color: #6CB7DA; font-size: 16px; padding: 3px;"
+);
+
 const namespace = window.location.pathname.slice(1);
 if (namespace === "" || !/^[a-zA-Z0-9]{1,16}$/.test(namespace)) {
     location.pathname = generateRandomString();
@@ -21,17 +50,14 @@ async function updateFromServer($textarea, $info) {
         $info.className = "green";
         $textarea.value = data;
     }
-    $info.innerText = "Last Update: " + new Date().toLocaleString();
+    $info.innerText = "Updated at: " + new Date().toLocaleString();
 }
+
 async function updateToServer($textarea, $info) {
     const data = $textarea.value;
     const success = await app.set(namespace, data);
-    if (success) {
-        $info.className = "green";
-    } else {
-        $info.className = "red";
-    }
-    $info.innerText = "Last Update: " + new Date().toLocaleString();
+    $info.className = success ? "green" : "red";
+    $info.innerText = "Updated at: " + new Date().toLocaleString();
 }
 
 function debounce(func, wait = 0) {

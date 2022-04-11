@@ -1,6 +1,7 @@
 const express = require("express");
+const path = require("path");
 
-module.exports = function (storage) {
+module.exports = function (storage, staticPath) {
     const app = express();
     app.use(express.json());
 
@@ -30,18 +31,10 @@ module.exports = function (storage) {
         }
     });
 
-    app.get("/", (req, res) => {
-        res.setHeader("Cache-Control", "public, max-age=31536000");
-        res.sendFile(__dirname.replace(/(server)$/, "/public/") + "index.html");
-    });
-
-    app.get("/:namespace", (req, res) => {
-        res.setHeader("Cache-Control", "public, max-age=31536000");
-        if (req.params.namespace.endsWith(".js") || req.params.namespace.endsWith(".css")) {
-            res.sendFile(__dirname.replace(/(server)$/, "/public/") + req.params.namespace);
-            return;
-        }
-        res.sendFile(__dirname.replace(/(server)$/, "/public") + "/index.html");
+    app.use(express.static(staticPath));
+    app.use("/**", function (req, res) {
+        // SPA
+        res.sendFile(path.join(staticPath, "index.html"));
     });
 
     app.on("close", () => {
