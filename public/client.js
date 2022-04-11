@@ -1,32 +1,43 @@
-const version = "0.0.3";
+const version = "0.1.0";
 class ShareMe {
     constructor(server) {
         this.server = server;
     }
     async get(namespace) {
-        typeCheck(namespace, "string");
-        const resp = await fetch(this.server, {
-            method: "POST",
-            headers: { "content-type": "application/json" },
-            body: JSON.stringify({ namespace }),
-        });
-        if (!resp.ok) return null;
-        const json = await resp.json();
-        if (json.success) return json.data;
-        return null;
+        // => string/null
+        try {
+            typeCheck(namespace, "string");
+            const url = new URL(this.server);
+            url.pathname = `/${namespace}`;
+            const resp = await fetch(url.toString(), {
+                method: "POST",
+            });
+            if (!resp.ok) return null;
+            return await resp.text();
+        } catch (e) {
+            return null;
+        }
     }
 
     async set(namespace, data) {
-        typeCheck(namespace, "string");
-        typeCheck(data, "string");
-        const resp = await fetch(this.server, {
-            method: "POST",
-            headers: { "content-type": "application/json" },
-            body: JSON.stringify({ namespace, data }),
-        });
-        if (!resp.ok) return false;
-        const json = await resp.json();
-        return json.success;
+        // => true/false
+        try {
+            typeCheck(namespace, "string");
+            typeCheck(data, "string");
+            const url = new URL(this.server);
+            url.pathname = `/${namespace}`;
+            const resp = await fetch(url.toString(), {
+                method: "POST",
+                body: JSON.stringify({ data }),
+                headers: {
+                    "content-type": "application/json",
+                },
+            });
+            if (!resp.ok) return false;
+            return true;
+        } catch (e) {
+            return false;
+        }
     }
 }
 

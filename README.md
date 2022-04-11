@@ -17,8 +17,8 @@ support fileDB & mongoDB
 ## Fetch data via POST
 
 ```
-get data: POST -> / -> with {namespace:String} -> receive {success:Boolean, data:String}
-set data: POST -> / -> with {namespace:String, data:String} -> receive {success:Boolean}
+get data: POST -> /:namespace  -> receive data, if fail, receive 403
+set data: POST -> /:namespace  -> with {data:String} -> receive 200, if fail, receive 503
 ```
 
 ## Run

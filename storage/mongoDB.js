@@ -33,7 +33,7 @@ class MongoDB {
     async set(namespace, data) {
         try {
             const result = await this.collection.updateOne({ namespace }, { $set: { data } }, { upsert: true });
-            return result.modifiedCount === 1;
+            return result.modifiedCount === 1 || result.upsertedCount === 1;
         } catch (e) {
             console.error(e);
             return false;
