@@ -26,7 +26,7 @@ console.log(
 console.log(
     `%c command line usage, replace ':namespace' with a namespace you want                                                        
     $ curl -X POST -H "Content-Type: application/json" -d '{"data":"anything you want to store..."}' ${location.origin}/:namespace
-    $ curl -X POST http://localhost:3000/:namespace                                                                               `,
+    $ curl -X POST ${location.origin}/:namespace                                                                               `,
     "color: #6CB7DA; font-size: 16px; padding: 3px;"
 );
 
