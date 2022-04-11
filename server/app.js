@@ -21,9 +21,11 @@ module.exports = function (storage, staticPath) {
                 else res.send("");
             } else {
                 // set
-                const success = await storage.set(namespace, req.body.data);
+                if (!["string", "number", "boolean"].includes(typeof namespace))
+                    res.status(403).send("data must be string");
+                const success = await storage.set(namespace, String(req.body.data));
                 if (success) res.send("ok");
-                else res.status(500).send();
+                else res.status(500).send("failed to save data");
             }
         } catch (e) {
             console.error(e);
