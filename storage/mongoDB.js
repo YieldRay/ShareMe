@@ -17,7 +17,7 @@ class MongoDB {
     }
     async connect() {
         await this.client.connect();
-        console.log("Connected successfully to database");
+        console.log("Connected successfully to MongoDB");
         this.db = this.client.db(this.databaseName);
         this.collection = this.db.collection(this.collectionName);
     }

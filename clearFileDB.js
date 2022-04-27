@@ -7,6 +7,3 @@ fs.writeFile(filename, "{}", "utf8")
     .catch((e) => {
         console.error(e);
     });
-
-
-    // application/json

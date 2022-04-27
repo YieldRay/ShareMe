@@ -10,7 +10,6 @@ module.exports = function (storage) {
             // handle POST request
             const namespace = req.params.namespace;
             console.log(new Date().toLocaleString() + " " + namespace, req.body);
-
             if (!namespace || !/^[a-zA-Z0-9]{1,16}$/.test(namespace)) {
                 res.status(400).send("namespace should fit /^[a-zA-Z0-9]{1,16}$/"); // client-side use Response.ok
                 return;
@@ -34,10 +33,16 @@ module.exports = function (storage) {
         }
     });
 
-    app.use(express.static(path.resolve(__dirname + "/../public")));
+    app.use(
+        express.static(path.resolve(__dirname + "/../public"), {
+            maxAge: 1000 * 60 * 60 * 24 * 7,
+        })
+    );
     app.use("/**", function (req, res) {
         // SPA
-        res.sendFile(path.resolve(__dirname + "/../public/index.html"));
+        res.sendFile(path.resolve(__dirname + "/../public/index.html"), {
+            maxAge: 1000 * 60 * 60 * 24 * 7,
+        });
     });
 
     app.on("close", () => {

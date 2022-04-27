@@ -11,7 +11,7 @@ class FileDB {
             await fs.writeFile(this.filename, "{}", "utf8");
         }
         const data = await fs.readFile(this.filename, "utf8");
-        console.log("Connected successfully to file");
+        console.log("Successfully read file");
         try {
             JSON.parse(data);
         } catch (e) {

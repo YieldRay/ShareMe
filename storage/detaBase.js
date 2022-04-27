@@ -6,7 +6,7 @@ class DetaBase {
         this.db = deta.Base(base_name);
     }
     async connect() {
-        console.log("Connecting to Deta Base");
+        console.log("Will connect to Deta Base");
     }
     close() {
         // do nothing

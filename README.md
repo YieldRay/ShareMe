@@ -21,7 +21,6 @@ get data: POST -> /:namespace  -> success 200&data, fail 400/405
 set data: POST -> /:namespace  -> with data=string -> success 200, fail 400/500
 application/x-www-form-urlencoded : data=string
 application/json : {"data": "string"}
-
 ```
 
 ## Run
@@ -55,4 +54,5 @@ You do not need to do anything with environment variables, as Deta will automati
 use Data Base as its database, but if you specify MONGO_DB_URI, it will use MongoDB rather than Deta Base
 
 the default BASE_NAME will be "ShareMe", but if do not like it, just specify BASE_NAME in environment variables  
+
 [![Deploy](https://button.deta.dev/1/svg)](https://go.deta.dev/deploy?repo=https%3A%2F%2Fgithub.com%2FYieldRay%2FShareMe)

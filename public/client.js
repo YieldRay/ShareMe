@@ -5,6 +5,7 @@ class ShareMe {
     }
     async get(namespace) {
         // => string/null
+        if (!isNamespaceValid(namespace)) throw new Error("Invalid namespace");
         try {
             typeCheck(namespace, "string");
             const url = new URL(this.server);
@@ -21,6 +22,7 @@ class ShareMe {
 
     async set(namespace, data) {
         // => true/false
+        if (!isNamespaceValid(namespace)) throw new Error("Invalid namespace");
         try {
             typeCheck(namespace, "string");
             typeCheck(data, "string");
@@ -39,6 +41,10 @@ class ShareMe {
             return false;
         }
     }
+}
+
+function isNamespaceValid(namespace) {
+    return /^[a-zA-Z0-9]{1,16}$/.test(namespace);
 }
 
 function typeCheck(data, type) {
