@@ -1,5 +1,5 @@
 const fs = require("fs/promises");
-const filename = "./server/" + "db.json";
+const filename = "./.database.json";
 fs.writeFile(filename, "{}", "utf8")
     .then(() => {
         console.log("clear success");
@@ -7,3 +7,6 @@ fs.writeFile(filename, "{}", "utf8")
     .catch((e) => {
         console.error(e);
     });
+
+
+    // application/json

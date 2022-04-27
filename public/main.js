@@ -1,5 +1,6 @@
 import { ShareMe, version } from "./client.js";
 const app = new ShareMe(location.origin);
+window.app = app;
 console.log(
     "%c     _____ _     %c               __  __      \n" +
         "%c    / ____| |%c                  |  \\/  |     \n" +
@@ -25,7 +26,7 @@ console.log(
 );
 console.log(
     `%c command line usage, replace ':namespace' with a namespace you want                                                        
-    $ curl -X POST -H "Content-Type: application/json" -d '{"data":"anything you want to store..."}' ${location.origin}/:namespace
+    $ curl -X POST -d data=any_thing_you_want_to_store ${location.origin}/:namespace
     $ curl -X POST ${location.origin}/:namespace                                                                               `,
     "color: #6CB7DA; font-size: 16px; padding: 3px;"
 );

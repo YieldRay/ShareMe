@@ -1,6 +1,7 @@
 const fs = require("fs/promises");
 class FileDB {
-    constructor(filename = __dirname + "/db.json") {
+    filename;
+    constructor(filename = __dirname + "/../.database.json") {
         this.filename = filename;
     }
     async connect() {

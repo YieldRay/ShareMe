@@ -16,7 +16,7 @@ class TmpDB {
         this.db = undefined;
     }
     async get(namespace) {
-        // to fit the interface, use async 
+        // to fit the interface, use async
         try {
             return this.db[namespace] || "";
         } catch (e) {

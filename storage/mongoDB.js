@@ -1,8 +1,12 @@
 const { MongoClient, ServerApiVersion } = require("mongodb");
 
 class MongoDB {
+    databaseName;
+    collectionName;
+    client;
+    db;
+    collection;
     constructor(uri, databaseName, collectionName) {
-        this.uri = uri;
         this.databaseName = databaseName;
         this.collectionName = collectionName;
         this.client = new MongoClient(uri, {
@@ -33,7 +37,7 @@ class MongoDB {
     async set(namespace, data) {
         try {
             const result = await this.collection.updateOne({ namespace }, { $set: { data } }, { upsert: true });
-            return result.modifiedCount === 1 || result.upsertedCount === 1;
+            return result.acknowledged;
         } catch (e) {
             console.error(e);
             return false;
