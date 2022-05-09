@@ -1,4 +1,4 @@
-const version = "0.3.0";
+const version = "0.4.0";
 class ShareMe {
     constructor(server) {
         this.server = server;
@@ -11,7 +11,7 @@ class ShareMe {
             const url = new URL(this.server);
             url.pathname = `/${namespace}`;
             const resp = await fetch(url.toString(), {
-                method: "POST",
+                method: "POST", // use POST with no body to get data
             });
             if (!resp.ok) return null;
             return await resp.text();
@@ -20,17 +20,17 @@ class ShareMe {
         }
     }
 
-    async set(namespace, data) {
+    async set(namespace, t) {
         // => true/false
         if (!isNamespaceValid(namespace)) throw new Error("Invalid namespace");
         try {
             typeCheck(namespace, "string");
-            typeCheck(data, "string");
+            typeCheck(t, "string");
             const url = new URL(this.server);
             url.pathname = `/${namespace}`;
             const resp = await fetch(url.toString(), {
                 method: "POST",
-                body: JSON.stringify({ data }),
+                body: JSON.stringify({ t }),
                 headers: {
                     "content-type": "application/json",
                 },

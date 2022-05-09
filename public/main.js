@@ -25,9 +25,10 @@ console.log(
     "color:#00FF2E"
 );
 console.log(
-    `%c command line usage, replace ':namespace' with a namespace you want                                                        
-    $ curl -X POST -d data=any_thing_you_want_to_store ${location.origin}/:namespace
-    $ curl -X POST ${location.origin}/:namespace                                                                               `,
+    `%c For command line usage, replace ':namespace' with a namespace you want          
+    $ curl ${location.origin}/:namespace                                              
+    $ curl -d t=any_thing_you_want_to_store ${location.origin}/:namespace
+`,
     "color: #6CB7DA; font-size: 16px; padding: 3px;"
 );
 
