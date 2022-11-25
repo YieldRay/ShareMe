@@ -1,6 +1,6 @@
 {
   "name": "shareme",
-  "version": "0.3.0",
+  "version": "0.4.1",
   "private": true,
   "engines": {
     "node": "16.x"
@@ -26,7 +26,7 @@
   "homepage": "https://github.com/YieldRay/shareMe#readme",
   "dependencies": {
     "deta": "^1.1.0",
-    "express": "^4.18.1",
-    "mongodb": "^4.5.0"
+    "express": "^4.18.2",
+    "mongodb": "^4.12.1"
   }
 }

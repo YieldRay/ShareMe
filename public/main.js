@@ -1,4 +1,4 @@
-import { ShareMe, version } from "./client.js";
+import { ShareMe, isNamespaceValid } from "./client.js";
 const app = new ShareMe(location.origin);
 window.app = app;
 console.log(
@@ -8,7 +8,7 @@ console.log(
         "%c    \\___ \\|%c '_ \\ / _` | '__/ _ \\ |/\\| |/ _ \\ \n" +
         "%c    ____) | |%c | | (_| | | |  __/ |  | |  __/\n" +
         "%c   |_____/|_|%c |_|\\__,_|_|  \\___|_|  |_|\\___|\n" +
-        `%c                           v${version}-by.YieldRay`,
+        `%c                           v${ShareMe.VERSION}-by.YieldRay`,
 
     "color:#ff0000",
     "color:#ff0000",
@@ -25,17 +25,20 @@ console.log(
     "color:#00FF2E"
 );
 console.log(
-    `%c For command line usage, replace ':namespace' with a namespace you want          
-    $ curl ${location.origin}/:namespace                                              
-    $ curl -d t=any_thing_you_want_to_store ${location.origin}/:namespace
+    `%c
+
+Usage for command line  (replace \`:namespace\` with a namespace you want)  
+        
+$ curl ${location.origin}/:namespace                                              
+$ curl ${location.origin}/:namespace -d t=any_thing_you_want_to_store
+
 `,
-    "color: #6CB7DA; font-size: 16px; padding: 3px;"
+    "color: #66ccff; font-size: 16px; padding: 2px;"
 );
 
+// Forbid invalid namespace
 const namespace = window.location.pathname.slice(1);
-if (namespace === "" || !/^[a-zA-Z0-9]{1,16}$/.test(namespace)) {
-    location.pathname = generateRandomString();
-}
+if (!isNamespaceValid(namespace)) location.pathname = generateRandomString();
 
 function generateRandomString(length = 4) {
     const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -45,12 +48,15 @@ function generateRandomString(length = 4) {
 }
 
 async function updateFromServer($textarea, $info) {
+    $textarea.disabled = true;
     const data = await app.get(namespace);
+    $textarea.disabled = false;
     if (data === null) {
         $info.className = "red";
     } else {
         $info.className = "green";
         $textarea.value = data;
+        $textarea.focus();
     }
     $info.innerText = "Updated at: " + new Date().toLocaleString();
 }

@@ -50,7 +50,7 @@ default settings is that if you don't specify the storage, it will use fileDB at
 if you want to use a database, you need to specify the ".env" file or set environment variable like:  
 example:
 
-```js
+```ini
 MONGO_DB_URI=mongodb+srv://username:password@server
 MONGO_DB_NAME=shareme_db
 MONGO_DB_COLLECTION=shareme
