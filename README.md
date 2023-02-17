@@ -54,8 +54,8 @@ example:
 MONGO_DB_URI=mongodb+srv://username:password@server
 MONGO_DB_NAME=shareme_db
 MONGO_DB_COLLECTION=shareme
-PROJECT_KEY=fill_this_only_if_you_use_Deta_Base
-BASE_NAME=fill_this_only_if_you_use_Deta_Base
+DETA_PROJECT_KEY=fill_this_only_if_you_use_Deta_Base
+DETA_BASE_NAME=fill_this_only_if_you_use_Deta_Base
 ```
 
 save the file as ".env" in root folder for develop,  

@@ -12,7 +12,9 @@ class DetaBase {
         // do nothing
     }
     async get(namespace) {
-        return await this.db.get(namespace);
+        const data = await this.db.get(namespace);
+        if (data) return data.value;
+        else return "";
     }
     async set(namespace, data) {
         return await this.db.put(data, namespace);

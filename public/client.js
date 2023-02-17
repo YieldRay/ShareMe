@@ -1,5 +1,5 @@
 class ShareMe {
-    static VERSION = "0.4.1";
+    static VERSION = "0.4.2";
     constructor(server) {
         this.server = server;
     }
