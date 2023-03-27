@@ -1,3 +1,5 @@
+# deprecated in favor of deno version <https://github.com/yieldray/shareme-deno>
+
 # ShareMe!
 
 An online service just like <https://note.ms/>  

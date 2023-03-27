@@ -6,6 +6,8 @@ micros:
       engine: nodejs16
       primary: true
       run: "node server.js"
+      public_routes:
+          - "/*"
       presets:
           env:
               #   - name: DETA_PROJECT_KEY
